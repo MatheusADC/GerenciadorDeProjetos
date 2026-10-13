@@ -4,7 +4,7 @@ import { MainLayout } from './shared/layouts/main-layout/main-layout';
 export const routes: Routes = [
   {
     path: 'login',
-    loadComponent: () => import('./features/auth/login/login').then(m => m.Login),
+    loadComponent: () => import('./features/auth/login/login').then((m) => m.Login),
     title: 'Login',
   },
   {
@@ -18,14 +18,18 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        loadComponent: () => import('./features/dashboard/dashboard').then(m => m.Dashboard),
+        loadComponent: () => import('./features/dashboard/dashboard').then((m) => m.Dashboard),
         title: 'Dashboard',
+      },
+      {
+        path: 'project:projecttId',
+        loadChildren: () => import('./features/project/project.routes').then((m) => m.PROJECT_ROUTES),
       },
     ],
   },
   {
     path: '**',
-    loadComponent: () => import('./features/not-found/not-found').then(m => m.NotFound),
+    loadComponent: () => import('./features/not-found/not-found').then((m) => m.NotFound),
     title: 'Página não encontrada',
   },
 ];
