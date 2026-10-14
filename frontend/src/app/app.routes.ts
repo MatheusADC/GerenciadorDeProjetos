@@ -25,6 +25,11 @@ export const routes: Routes = [
         path: 'project:projecttId',
         loadChildren: () => import('./features/project/project.routes').then((m) => m.PROJECT_ROUTES),
       },
+      {
+        path: 'members',
+        loadComponent: () => import('./features/members/members').then((m) => m.Members),
+        title: 'Membros',
+      },
     ],
   },
   {
