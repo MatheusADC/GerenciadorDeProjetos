@@ -30,6 +30,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/members/members').then((m) => m.Members),
         title: 'Membros',
       },
+      {
+        path: 'settings',
+        loadChildren: () => import('./features/settings/settings.routes').then((m) => m.SETTINGS_ROUTES),
+      },
     ],
   },
   {
