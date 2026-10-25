@@ -13,13 +13,9 @@ export class Board {
   private readonly _router = inject(Router);
   private readonly _projectApi = inject(ProjectApi);
 
-  project: IProject = {
-    id: 'PRJ-101',
-    name: 'Projeto Phoenix',
-    description: 'Plataforma de gestão de projetos ágeis com IA',
-  };
+  project: IProject = this._activatedRoute.snapshot.data['project'];
 
-  tasks = signal<ITask[]>([]);
+  tasks = signal<ITask[]>(this._activatedRoute.snapshot.data['tasks']);
 
   todoTasks = computed(() => this.tasks().filter((t) => t.status === 'todo'));
   inProgressTasks = computed(() => this.tasks().filter((t) => t.status === 'in_progress'));
