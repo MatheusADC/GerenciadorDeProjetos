@@ -30,6 +30,7 @@ export const PROJECT_ROUTES: Routes = [
       },
       {
         path: 'task/:taskId',
+        outlet: 'detail',
         loadComponent: () => import('./task-detail/task-detail').then((m) => m.TaskDetail),
         title: 'Detalhes da Task'
       },
