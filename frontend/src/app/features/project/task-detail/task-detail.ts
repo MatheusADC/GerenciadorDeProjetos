@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ITask } from '../../../core/models';
 import { TaskApi } from '../../../core/services/task-api';
 import { HasUnsavedChanges } from '../../../core/guards/unsaved-changes-guard';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-detail',
@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class TaskDetail implements OnInit, HasUnsavedChanges {
   private readonly _taskApi = inject(TaskApi);
   private readonly _activatedRoute = inject(ActivatedRoute);
+  private readonly _router = inject(Router);
 
   task = signal<ITask>(this._activatedRoute.snapshot.data['task'] || null);
 
@@ -54,6 +55,8 @@ export class TaskDetail implements OnInit, HasUnsavedChanges {
   }
 
   close(): void {
-
+    this._router.navigate([{ outlets: { details: null } }], {
+      relativeTo: this._activatedRoute.parent,
+    });
   }
 }
