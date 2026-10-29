@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IProject } from '../../../core/models';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-project-settings',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './project-settings.html'
 })
 export class ProjectSettings {
