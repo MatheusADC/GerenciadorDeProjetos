@@ -22,6 +22,7 @@ export const PROJECT_ROUTES: Routes = [
       },
       {
         path: 'backlog',
+        resolve: { tasks: projectTasksResolver },
         loadComponent: () => import('./backlog/backlog').then((m) => m.Backlog),
         title: 'Backlog',
       },
