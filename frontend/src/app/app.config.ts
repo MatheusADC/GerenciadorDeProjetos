@@ -7,6 +7,7 @@ import {
   provideRouter,
   TitleStrategy,
   withPreloading,
+  withViewTransitions,
 } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
@@ -20,7 +21,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideRouter(routes, withPreloading(CustomPreloadingStrategy)),
+    provideRouter(routes, withPreloading(CustomPreloadingStrategy), withViewTransitions()),
     provideHttpClient(withInterceptors([authInterceptor, errorInterceptor])),
     { provide: TitleStrategy, useClass: CustomTitleStrategy },
   ],
