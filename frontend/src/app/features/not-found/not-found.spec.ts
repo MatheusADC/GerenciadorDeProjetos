@@ -35,4 +35,12 @@ describe('NotFound Component', () => {
 
     expect(linkA?.getAttribute('href')).toBe('/');
   });
+
+  it('deve exibir a descrição da página de forma resiliente (usando data-testid)', () => {
+    const html: HTMLElement = fixture.nativeElement;
+    const descricaoP = html.querySelector('[data-testid="page-description"]');
+
+    expect(descricaoP).toBeTruthy();
+    expect(descricaoP?.textContent).toContain('não existe ou foi movida');
+  });
 });
