@@ -3,6 +3,7 @@ import { Login } from './login';
 import { of, throwError } from 'rxjs';
 import { AuthManager } from '../../../core/services/auth-manager';
 import { Router } from '@angular/router';
+import { By } from '@angular/platform-browser';
 
 describe('Login Component', () => {
     let component: Login;
@@ -64,5 +65,36 @@ describe('Login Component', () => {
 
         expect(component.error).toBe('Email inválido. Tente felipe@example.com ou ana@example.com');
         expect(component.isLoading).toBe(false);
+    });
+
+    it('deve atualizar o e-mail via ngModel quando o usuário digitar no input', async () => {
+        const inputEl: HTMLInputElement = fixture.nativeElement.querySelector('[data-testid="email-input"]');
+        const email = 'aluno@teste.com';
+
+        inputEl.value = email;
+
+        inputEl.dispatchEvent(new Event('input'));
+
+        fixture.detectChanges();
+
+        await fixture.whenStable();
+
+        expect(component.email).toBe(email);
+    });
+
+    it('deve acionar o login ao submeter o formulário (ngSubmit)', async () => {
+        const inputEl: HTMLInputElement = fixture.nativeElement.querySelector('[data-testid="email-input"]');
+        const email = 'aluno@teste.com';
+        inputEl.value = email;
+        inputEl.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const formDebug = fixture.debugElement.query(By.css('[data-testid="login-form"]'));
+        
+        formDebug.triggerEventHandler('submit', null);
+
+        expect(authManagerMock.login).toHaveBeenCalledWith(email);
+        expect(routerMock.navigate).toHaveBeenCalledWith(['/dashboard']);
     });
 });
