@@ -126,7 +126,7 @@
         <!-- Formulário Principal -->
         <form (ngSubmit)="login()" data-testid="login-form" class="flex flex-col gap-6">
           @if (error) {
-            <div class="p-4 rounded-2xl bg-red-500/20 border border-red-500/40 text-red-200 text-sm font-medium flex items-center gap-3">
+            <div data-testid="error-message" class="p-4 rounded-2xl bg-red-500/20 border border-red-500/40 text-red-200 text-sm font-medium flex items-center gap-3">
               <span class="text-lg">⚠️</span>
               <span>{{ error }}</span>
             </div>
@@ -149,6 +149,7 @@
           </div>
 
           <button
+            data-testid="submit-button"
             type="submit"
             [disabled]="isLoading || !email"
             class="w-full mt-2 bg-gradient-to-r from-indigo-500 via-indigo-600 to-purple-600 hover:from-indigo-600 hover:to-purple-700 disabled:opacity-40 disabled:cursor-not-allowed text-white font-extrabold py-4 px-6 rounded-2xl shadow-xl shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 active:translate-y-0 transition-all text-base tracking-wide flex items-center justify-center gap-2"
