@@ -97,4 +97,31 @@ describe('Login Component', () => {
         expect(authManagerMock.login).toHaveBeenCalledWith(email);
         expect(routerMock.navigate).toHaveBeenCalledWith(['/dashboard']);
     });
+
+    it('deve renderizar a mensagem de erro no HTML quando a variável error estiver preenchida', () => {
+        const errorMessage = 'Credenciais inválidas. Tente novamente.';
+
+        component.error = errorMessage;
+
+        fixture.detectChanges();
+
+        const errorEl: HTMLElement = fixture.nativeElement.querySelector(
+            '[data-testid="error-message"]',
+        );
+
+        expect(errorEl).toBeTruthy();
+        expect(errorEl.textContent).toContain(errorMessage);
+    });
+
+    it('deve desabilitar o botão e alterar o texto enquanto estiver carregando (isLoading)', () => {
+        component.isLoading = true;
+        fixture.detectChanges();
+
+        const errorEl: HTMLElement = fixture.nativeElement.querySelector(
+            '[data-testid="submit-button"]',
+        );
+
+        expect(errorEl).toBe(true);
+        expect(errorEl.textContent).toContain('Autenticando');
+    });
 });
